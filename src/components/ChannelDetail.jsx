@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { Videos, ChannelCard } from "./";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
-const ChannelDetail = () => {
+const ChannelDetail = ({ theme }) => {
   const { id } = useParams();
   const [channelDetail, setChannelDetail] = useState(null);
   const [videos, setVideos] = useState([]);
@@ -30,7 +30,11 @@ const ChannelDetail = () => {
             zIndex: 10,
           }}
         />
-        <ChannelCard channelDetail={channelDetail} marginTop="-110px" />
+        <ChannelCard
+          channelDetail={channelDetail}
+          marginTop="-110px"
+          theme={theme}
+        />
       </Box>
       <Box display="flex" p="2">
         <Box sx={{ mr: { sm: "60px", md: "15px", lg: "50px", xl: "110px" } }} />

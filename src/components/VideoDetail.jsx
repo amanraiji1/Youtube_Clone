@@ -7,7 +7,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Videos } from "./";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
-const VideoDetail = () => {
+const VideoDetail = ({ theme }) => {
   const { id } = useParams();
   const [videoDetail, setVideoDetail] = useState(null);
   const [videos, setVideos] = useState([]);
@@ -22,8 +22,18 @@ const VideoDetail = () => {
     );
   }, [id]);
 
-  if (!videoDetail?.snippet) return "Loading...";
-
+  if (!videoDetail?.snippet) {
+    return (
+      <Typography
+        color={theme === true ? "#000" : "#fff"}
+        variant="h5"
+        fontWeight="bold"
+        p={2}
+      >
+        Loading...
+      </Typography>
+    );
+  }
   const {
     snippet: { title, channelId, channelTitle },
     statistics: { viewCount, likeCount },
@@ -45,20 +55,25 @@ const VideoDetail = () => {
               className="react-player"
               controls
             />
-            <Typography color="#fff" variant="h5" fontWeight="bold" p={2}>
+            <Typography
+              color={theme === true ? "#000" : "#fff"}
+              variant="h5"
+              fontWeight="bold"
+              p={2}
+            >
               {title}
             </Typography>
             <Stack
               direction="row"
               justifyContent="space-between"
-              sx={{ color: "#fff" }}
+              sx={{ color: theme === true ? "#000" : "#fff" }}
               py={1}
               px={2}
             >
               <Link to={`/channel/${channelId}`}>
                 <Typography
                   variant={{ sm: "subtitle1", md: "h6" }}
-                  color="#fff"
+                  color={theme === true ? "#000" : "#fff"}
                 >
                   {channelTitle}
                   <CheckCircleIcon

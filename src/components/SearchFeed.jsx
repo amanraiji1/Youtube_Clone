@@ -6,7 +6,7 @@ import { Videos } from "./";
 
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
-const SearchFeed = () => {
+const SearchFeed = ({ theme }) => {
   const [videos, setVideos] = useState([]);
   const { searchTerm } = useParams();
 
@@ -26,12 +26,17 @@ const SearchFeed = () => {
         ml: { sm: "45px", md: "0", lg: "50px", xl: "100px" },
       }}
     >
-      <Typography variant="h4" fontWeight="bold" mb={2} sx={{ color: "white" }}>
+      <Typography
+        variant="h4"
+        fontWeight="bold"
+        mb={2}
+        sx={{ color: theme === true ? "#000" : "#fff" }}
+      >
         Search Results for :{" "}
         <span style={{ color: "#FC1503" }}>{searchTerm}</span> videos
       </Typography>
 
-      <Videos videos={videos} />
+      <Videos videos={videos} theme={theme} />
     </Box>
   );
 };

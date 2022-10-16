@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
 
@@ -10,18 +10,31 @@ import {
   SearchFeed,
 } from "./components";
 
-const App = () => (
-  <BrowserRouter>
-    <Box sx={{ backgroundColor: "#000" }}>
-      <Navbar />
-      <Routes>
-        <Route path="/" exact element={<Feed />} />
-        <Route path="/video/:id" element={<VideoDetail />} />
-        <Route path="/channel/:id" element={<ChannelDetail />} />
-        <Route path="/search/:searchTerm" element={<SearchFeed />} />
-      </Routes>
-    </Box>
-  </BrowserRouter>
-);
+const App = () => {
+  const [theme, setTheme] = useState("true");
+  return (
+    <BrowserRouter>
+      <Box
+        sx={{
+          backgroundColor: theme === true ? "#fff" : "#000",
+        }}
+      >
+        <Navbar theme={theme} setTheme={setTheme} />
+        <Routes>
+          <Route path="/" exact element={<Feed theme={theme} />} />
+          <Route path="/video/:id" element={<VideoDetail theme={theme} />} />
+          <Route
+            path="/channel/:id"
+            element={<ChannelDetail theme={theme} />}
+          />
+          <Route
+            path="/search/:searchTerm"
+            element={<SearchFeed theme={theme} />}
+          />
+        </Routes>
+      </Box>
+    </BrowserRouter>
+  );
+};
 
 export default App;

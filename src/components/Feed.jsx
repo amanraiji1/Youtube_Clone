@@ -5,7 +5,7 @@ import { SideBar, Videos } from "./";
 
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
-const Feed = () => {
+const Feed = ({ theme }) => {
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);
 
@@ -27,12 +27,13 @@ const Feed = () => {
         <SideBar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          theme={theme}
         />
 
         <Typography
           className="copyright"
           variant="body2"
-          sx={{ mt: 1.5, color: "#fff" }}
+          sx={{ mt: 1.5, color: theme === true ? "#000" : "#fff" }}
         >
           Copyright © 2022 Aman Rai
         </Typography>
@@ -51,12 +52,12 @@ const Feed = () => {
           variant="h4"
           fontWeight="bold"
           mb={2}
-          sx={{ color: "white" }}
+          sx={{ color: theme === true ? "#000" : "#fff" }}
         >
           {selectedCategory} <span style={{ color: "#FC1503" }}>videos</span>
         </Typography>
 
-        <Videos videos={videos} />
+        <Videos videos={videos} theme={theme} />
       </Box>
     </Stack>
   );
